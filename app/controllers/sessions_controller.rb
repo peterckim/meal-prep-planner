@@ -1,14 +1,35 @@
 class SessionsController < ApplicationController
+    def new
+      @user = User.new
+    end
+
     def create
-      @user = User.find_or_create_by(uid: auth['uid']) do |u|
-        u.name = auth['info']['name']
-        u.email = auth['info']['email']
-        u.image = auth['info']['image']
+      if auth
+        @user = User.find_or_create_by(uid: auth['uid']) do |u|
+          u.name = auth['info']['name']
+          u.email = auth['info']['email']
+          u.image = auth['info']['image']
+        end
+     
+        session[:user_id] = @user.id
+        redirect_to recipes_path
+      else
+        @user = User.find_by(:email => params[:email])
+        if @user && @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          redirect_to recipes_path
+        else
+          flash.now[:notice] = "Invalid email/password combination."
+          @user = User.new
+          render 'welcome/home'
+        end
       end
-   
-      session[:user_id] = @user.id
-   
-      render 'welcome/home'
+    end
+
+    def destroy
+      reset_session
+      
+      redirect_to root_path
     end
    
     private

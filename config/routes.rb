@@ -5,10 +5,12 @@ Rails.application.routes.draw do
 
   get '/login' => 'sessions#new'
   post '/sessions' => 'sessions#create'
+  post '/logout' => 'sessions#destroy'
 
-  resources :recipes, only: [:show, :new, :index] do
-    resources :ingredients, only: [:show, :index]
+  resources :recipes, only: [:show, :new, :index, :create, :edit, :update] do
+    resources :ingredients, only: [:show, :index, :edit, :update]
   end
 
-  resources :ingredients
+  resources :ingredients, only: [:new, :create]
+  resources :users
 end

@@ -1,4 +1,6 @@
 <h1><%= @ingredient.name %></h1>
 
 
-<%= link_to "Edit Ingredient", edit_ingredient_path(@ingredient) %>
+<%= link_to "Edit Ingredient", edit_recipe_ingredient_path(@recipe, @ingredient) if @recipe %>
+
+<h3><%= link_to "Home", root_path %></h3>

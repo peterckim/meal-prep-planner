@@ -1,6 +1,14 @@
 class RecipesController < ApplicationController
+    before_action :require_login
+
     def index
-        @recipes = Recipe.all
+        @ingredients = Ingredient.all
+
+        if !params[:ingredient].blank?
+            @recipes = Recipe.filter_by_ingredient(params[:ingredient])
+        else
+            @recipes = Recipe.all
+        end
     end
 
     def show
@@ -12,15 +20,19 @@ class RecipesController < ApplicationController
     end
 
     def create
-
+        @recipe = Recipe.create(recipe_params)
+        redirect_to recipe_path(@recipe)
     end
 
     def edit
-
+        @recipe = Recipe.find_by(:id => params[:id])
     end
 
     def update
+        @recipe = Recipe.find_by(:id => params[:id])
+        @recipe.update(recipe_params)
 
+        redirect_to recipe_path(@recipe)
     end
 
     def destroy
@@ -30,6 +42,6 @@ class RecipesController < ApplicationController
     private
 
     def recipe_params
-        
+        params.require(:recipe).permit(:name, :content, ingredient_ids: [], ingredients_attributes: [:name])
     end
 end

@@ -9,6 +9,9 @@ class Recipe < ApplicationRecord
         self.all.includes(:ingredients).where(ingredients: { id: ingredient })
     end
 
+    def self.containsmilk
+        self.all.includes(:ingredients).where(ingredients: { name: 'Milk' } )
+    end
 
     def ingredients_attributes=(ingredient_attributes)
         ingredient_attributes.values.each do |ingredient_attribute|

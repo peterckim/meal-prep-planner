@@ -19,6 +19,8 @@ gem 'uglifier', '>= 1.3.0'
 # bcrypt
 gem 'bcrypt'
 
+gem 'thin'
+
 # pry
 gem 'pry'
 

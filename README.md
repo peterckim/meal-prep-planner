@@ -1,24 +1,44 @@
-# README
+# Recipe Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The MyPark App is a Rails Application designed to help connect NBA 2K MyPark free agents find teams to join and vice versa. The application also provides an all-purpose dashboard that displays previous match stats, upcoming matches, and user messages upon login.
 
-Things you may want to cover:
+Visit [Recipe Manager](#) to begin using the app. A video walkthrough is available on [here](#).
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+This app uses Ruby 2.3.3 and Rails 5.2.1. See deployment for notes on how to deploy the project on a live system.
 
-* Configuration
+### Installing
 
-* Database creation
+Fork and clone this repo. Install the required gems by running
 
-* Database initialization
+```
+bundle install
+```
 
-* How to run the test suite
+Set up the database with
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rake db:migrate
+```
 
-* Deployment instructions
+Start up the server with
 
-* ...
+```
+rails s
+```
+
+And find your app at [localhost:3000](http://localhost:3000).
+
+## Built With
+
+- [Bootstrap](https://getbootstrap.com/) - front-end framework
+- [Ruby on Rails](https://rubyonrails.org/) - server-side web application framework
+
+## Contributors Guide
+
+Bug reports, pull requests, and suggestions are welcome on GitHub at https://github.com/peterckim/recipe-manager. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## License
+
+The app is available as open source under the terms of the [MIT License](https://github.com/peterckim/recipe-manager/blob/master/LICENSE.md).

@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class SessionsController < ApplicationController
     def new
       @user = User.new
@@ -9,6 +11,7 @@ class SessionsController < ApplicationController
           u.name = auth['info']['name']
           u.email = auth['info']['email']
           u.image = auth['info']['image']
+          u.password = SecureRandom.hex
         end
      
         session[:user_id] = @user.id

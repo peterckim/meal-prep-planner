@@ -3,7 +3,7 @@
     <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %>
 <% end %>
 
-<%= link_to "New Ingredient", new_ingredient_path %>
+<%= link_to "New Ingredient", new_recipe_ingredient_path(@recipe) %>
 
 <h2><%= @recipe.content %></h2>
 

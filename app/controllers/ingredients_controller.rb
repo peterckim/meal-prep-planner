@@ -11,7 +11,15 @@ class IngredientsController < ApplicationController
     end
 
     def new
-        @ingredient = Ingredient.new
+        if params[:recipe_id]
+            if !Recipe.exists?(params[:recipe_id])
+                redirect_to recipes_path, alert: "Recipe not found."
+            else
+                @ingredient = Ingredient.new(recipe_ids: [params[:recipe_id]])
+            end
+        else
+            @ingredient = Ingredient.new
+        end
     end
 
     def create

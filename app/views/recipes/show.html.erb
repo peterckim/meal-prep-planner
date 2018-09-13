@@ -1,6 +1,6 @@
 <h1><%= link_to @recipe.name, recipe_path(@recipe) %></h1>
 <% @recipe.ingredients.each do |ingredient| %>
-    <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %>
+    <%= @recipe.recipe_ingredients.find{ |i| i.ingredient_id == ingredient.id }.quantity %> - <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %>
 <% end %>
 
 <%= link_to "New Ingredient", new_recipe_ingredient_path(@recipe) %>

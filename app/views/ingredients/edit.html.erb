@@ -3,4 +3,6 @@
 
 <h1>Edit Ingredient</h1>
 
-<%= render partial: 'form', locals: { ingredient: @ingredient } %>
+<%= form_for @ingredient, url: recipe_ingredient_path(@recipe, @ingredient) do |f| %>
+    <%= render partial: 'form', locals: { f: f} %>
+<% end %>

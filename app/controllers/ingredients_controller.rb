@@ -15,6 +15,7 @@ class IngredientsController < ApplicationController
             if !Recipe.exists?(params[:recipe_id])
                 redirect_to recipes_path, alert: "Recipe not found."
             else
+                @recipe = Recipe.find(params[:recipe_id])
                 @ingredient = Ingredient.new(recipe_ids: [params[:recipe_id]])
             end
         else
@@ -33,16 +34,14 @@ class IngredientsController < ApplicationController
 
     def edit
         @ingredient = Ingredient.find(params[:id])
-        if params[:recipe_id]
-            @recipe_ingredient = RecipeIngredient.find_by(:ingredient_id => [params[:id]], :recipe_id => [params[:recipe_id]])
-        end
+        @recipe = Recipe.find(params[:recipe_id])
     end
 
     def update
+        @recipe = Recipe.find(params[:recipe_id])
         @ingredient = Ingredient.find(params[:id])
         @ingredient.update(ingredient_params)
-
-        redirect_to ingredient_path(@ingredient)
+        redirect_to recipe_ingredient_path(@recipe, @ingredient)
     end
 
     def destroy

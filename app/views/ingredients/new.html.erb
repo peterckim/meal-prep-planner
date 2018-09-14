@@ -1,3 +1,6 @@
 <%= render partial: "shared/errors", locals: {object: @ingredient} %>
 <br>
-<%= render partial: 'form', locals: { ingredient: @ingredient } %>
+
+<%= form_for @ingredient, url: recipe_ingredients_path(@recipe, @ingredient), method: :post do |f| %>
+    <%= render partial: 'form', locals: { f: f} %>
+<% end %>

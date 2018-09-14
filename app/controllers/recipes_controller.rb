@@ -34,9 +34,13 @@ class RecipesController < ApplicationController
 
     def update
         @recipe = Recipe.find_by(:id => params[:id])
-        @recipe.update(recipe_params)
-
-        redirect_to recipe_path(@recipe)
+        if params[:recipe][:ingredients_attributes]["0"][:name] == "" || params[:recipe][:ingredients_attributes]["0"][:name] == nil
+            @recipe.update(params.require(:recipe).permit(:name, :content, ingredient_ids: []))
+            redirect_to recipe_path(@recipe)
+        else
+            @recipe.update(recipe_params)
+            redirect_to recipe_path(@recipe)
+        end
     end
 
     def destroy

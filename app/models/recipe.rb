@@ -19,4 +19,5 @@ class Recipe < ApplicationRecord
             self.ingredients << ingredient
         end
     end
+
 end

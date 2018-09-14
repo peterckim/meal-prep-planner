@@ -33,7 +33,9 @@ class IngredientsController < ApplicationController
 
     def edit
         @ingredient = Ingredient.find(params[:id])
-        @recipe = Recipe.find(params[:recipe_id])
+        if params[:recipe_id]
+            @recipe_ingredient = RecipeIngredient.find_by(:ingredient_id => [params[:id]], :recipe_id => [params[:recipe_id]])
+        end
     end
 
     def update

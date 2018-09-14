@@ -1,8 +1,3 @@
-<% if @recipe.errors.any? %>
-  <ul>
-    <% @recipe.errors.full_messages.each do |message| %>
-      <li style="color:red;"><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: "shared/errors", locals: {object: @recipe} %>
+<br>
 <%= render partial: 'form', locals: { recipe: @recipe } %>

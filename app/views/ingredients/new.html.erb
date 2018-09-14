@@ -2,5 +2,5 @@
 <br>
 
 <%= form_for @ingredient, url: recipe_ingredients_path(@recipe, @ingredient), method: :post do |f| %>
-    <%= render partial: 'form', locals: { f: f} %>
+    <%= render partial: 'form', locals: { f: f } %>
 <% end %>

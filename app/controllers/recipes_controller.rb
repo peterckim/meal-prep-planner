@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
     before_action :require_login
-
     def index
         @ingredients = Ingredient.all
 
@@ -20,6 +19,7 @@ class RecipesController < ApplicationController
     end
 
     def create
+        binding.pry
         @recipe = Recipe.new(recipe_params)
         if @recipe.save
             redirect_to recipe_path(@recipe)
@@ -34,7 +34,7 @@ class RecipesController < ApplicationController
 
     def update
         @recipe = Recipe.find_by(:id => params[:id])
-        if params[:recipe][:ingredients_attributes]["0"][:name] == "" || params[:recipe][:ingredients_attributes]["0"][:name] == nil
+        if params[:recipe][:recipe_ingredients_attributes]["0"][:ingredient_attributes][:name] == "" || params[:recipe][:recipe_ingredients_attributes]["0"][:ingredient_attributes][:name] == nil
             @recipe.update(params.require(:recipe).permit(:name, :content, ingredient_ids: []))
             redirect_to recipe_path(@recipe)
         else
@@ -49,7 +49,27 @@ class RecipesController < ApplicationController
 
     private
 
+=begin
+    params = {
+        recipe: {
+            name: "Name",
+            content: "Content",
+
+            ingredient_ids: [],
+
+            recipe_ingredients_attributes: {
+                0: {
+                    quantity: "quantity",
+                    ingredient_attributes: {
+                        name: "Name"
+                    }
+                }
+            }
+        }
+    }
+=end
+
     def recipe_params
-        params.require(:recipe).permit(:name, :content, ingredient_ids: [], ingredients_attributes: [:name])
+        params.require(:recipe).permit(:name, :content, ingredient_ids: [], recipe_ingredients_attributes: [:quantity, ingredient_attributes: [:name]])
     end
 end

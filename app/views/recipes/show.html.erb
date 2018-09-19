@@ -1,11 +1,17 @@
 <h1><%= link_to @recipe.name, recipe_path(@recipe) %></h1>
-<% @recipe.ingredients.each do |ingredient| %>
-    <%= @recipe.recipe_ingredients.find{ |i| i.ingredient_id == ingredient.id }.quantity  %> - <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %>
-<% end %>
+
+<h3>Ingredients:</h3>
+<ul>
+    <% @recipe.ingredients.each do |ingredient| %>
+        <li><%= @recipe.recipe_ingredients.find{ |i| i.ingredient_id == ingredient.id }.quantity  %> of <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %></li>
+    <% end %>
+</ul>
 
 <%= link_to "New Ingredient", new_recipe_ingredient_path(@recipe) %>
 
-<h2><%= @recipe.content %></h2>
+<h3>Instructions:</h3>
+
+<p><%= @recipe.content %></p>
 
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %>
 

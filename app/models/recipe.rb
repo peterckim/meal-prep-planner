@@ -20,4 +20,33 @@ class Recipe < ApplicationRecord
         end
     end
 
+
+    # recipe_ingredient_attributes = {
+    #     0: {
+    #         quantity: "4",
+    #         ingredient_attributes: {
+    #             name: "Bacon"
+    #         }
+    #     }
+    # }
+
+    # result = self.recipe_ingredients has { 
+    #     recipe_id: self.id, 
+    #     ingredient_id: Ingredient.find_or_create_by(:name => "Bacon").id
+    # }
+
+    def recipe_ingredients_attributes=(recipe_ingredient_attributes)
+        recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
+            ingredient = Ingredient.find_or_create_by(:name => recipe_ingredient_attribute[:ingredient_attributes][:name])
+
+            recipe_ingredient = RecipeIngredient.by_association(ingredient.id, self.id)
+
+            if recipe_ingredient.exists?
+
+            else
+                recipe_ingredient = RecipeIngredient.create(:ingredient_id => ingredient.id, :quantity => recipe_ingredient_attribute[:quantity])
+                self.recipe_ingredients << recipe_ingredient
+            end
+        end
+    end
 end

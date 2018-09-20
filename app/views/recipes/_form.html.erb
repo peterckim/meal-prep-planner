@@ -3,15 +3,17 @@
     <%= f.text_field :name %>
     <%= f.label "Content" %>
     <%= f.text_area :content %>
-    <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %>
-    
-    <%= f.fields_for :recipe_ingredients, recipe.recipe_ingredients.build do |recipe_ingredients_fields| %>
+    <%#<%= f.collection_select :ingredient_ids, Ingredient.all, :id, :name %>
+    <%= f.fields_for :recipe_ingredients do |recipe_ingredients_fields| %>
+        <p>
+        <%= recipe_ingredients_fields.collection_select :ingredient_id, Ingredient.all, :id, :name, prompt: true %>
         <%= recipe_ingredients_fields.label "Quantity" %>
         <%= recipe_ingredients_fields.text_field :quantity %>
         <%= recipe_ingredients_fields.fields_for :ingredient, recipe_ingredients_fields.object.build_ingredient do |ingredient_fields| %>
             <%= ingredient_fields.label "New Ingredient Name" %>
             <%= ingredient_fields.text_field :name %> 
         <% end %>
+        </p>
     <% end %>
 
     <%= f.submit %>

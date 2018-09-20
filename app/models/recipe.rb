@@ -37,12 +37,22 @@ class Recipe < ApplicationRecord
 
     def recipe_ingredients_attributes=(recipe_ingredient_attributes)
         recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
-            ingredient = Ingredient.find_or_create_by(:name => recipe_ingredient_attribute[:ingredient_attributes][:name])
+            if recipe_ingredient_attribute[:ingredient_attributes][:name] != ""
+                
+                ingredient = Ingredient.find_or_create_by(:name => recipe_ingredient_attribute[:ingredient_attributes][:name])
 
-            recipe_ingredient = RecipeIngredient.find_or_create_by(:ingredient_id => ingredient.id)
-            recipe_ingredient.update(:quantity => recipe_ingredient_attribute[:quantity])
+                recipe_ingredient = RecipeIngredient.find_or_create_by(:ingredient_id => ingredient.id)
+                recipe_ingredient.update(:quantity => recipe_ingredient_attribute[:quantity])
 
-            self.recipe_ingredients << recipe_ingredient
+                self.recipe_ingredients << recipe_ingredient
+            elsif recipe_ingredient_attribute[:ingredient_id] != ""
+                ingredient = Ingredient.find_by(:id => recipe_ingredient_attribute[:ingredient_id])
+
+                recipe_ingredient = RecipeIngredient.find_or_create_by(:ingredient_id => ingredient.id)
+                recipe_ingredient.update(:quantity => recipe_ingredient_attribute[:quantity])
+
+                self.recipe_ingredients << recipe_ingredient
+            end
         end
     end
 end

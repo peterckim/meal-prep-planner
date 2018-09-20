@@ -3,7 +3,7 @@ class Ingredient < ApplicationRecord
     has_many :recipes, through: :recipe_ingredients
     accepts_nested_attributes_for :recipes
     
-    validates :name, presence: true, uniqueness: true
+    validates :name, presence: true
 
     def recipes_attributes=(recipe_attributes)
         recipe_attributes.values.each do |recipe_attribute|
@@ -18,16 +18,9 @@ class Ingredient < ApplicationRecord
     def recipe_ingredients_attributes=(recipe_ingredient_attributes)
         recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
 
-            
-            recipe_ingredient = RecipeIngredient.by_association(self.id, recipe.id)
-
-            if recipe_ingredient.exists?
-                recipe_ingredient.quantity = recipe_ingredient_attribute[:quantity]
-                recipe_ingredient.save
-            else
-                recipe_ingredient = RecipeIngredient.create(:ingredient_id => ingredient.id, :quantity => recipe_ingredient_attribute[:quantity])
-                self.recipe_ingredients << recipe_ingredient
-            end
+            self.recipe_ingredients = self.recipe_ingredients.drop(1)
+            recipe_ingredient = RecipeIngredient.create(:quantity => recipe_ingredient_attribute[:quantity])
+            self.recipe_ingredients << recipe_ingredient
         end
     end
 end

@@ -3,6 +3,7 @@
 <%= f.fields_for :recipe_ingredients, @ingredient.recipe_ingredients.build do |recipe_ingredients_fields| %>
     <%= recipe_ingredients_fields.label "Quantity" %>
     <%= recipe_ingredients_fields.text_field :quantity %>
+
 <% end %>
 <%= f.collection_check_boxes :recipe_ids, Recipe.all, :id, :name %>
 <%= f.submit %>

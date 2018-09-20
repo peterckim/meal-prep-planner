@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
     has_many :ingredients, through: :recipe_ingredients
     accepts_nested_attributes_for :ingredients
 
-    validates :name, presence: true, uniqueness: true
+    validates :name, presence: true
 
     def self.filter_by_ingredient(ingredient)
         self.all.includes(:ingredients).where(ingredients: { id: ingredient })

@@ -24,8 +24,8 @@ class IngredientsController < ApplicationController
     end
 
     def create
-        binding.pry
         @ingredient = Ingredient.new(ingredient_params)
+        @ingredient.recipe_ingredients.last.recipe_id = params[:ingredient][:recipe_ids][-1].to_i
         if @ingredient.save
             redirect_to recipes_path
         else
@@ -42,6 +42,9 @@ class IngredientsController < ApplicationController
         @recipe = Recipe.find(params[:recipe_id])
         @ingredient = Ingredient.find(params[:id])
         @ingredient.update(ingredient_params)
+        @recipe_ingredient = RecipeIngredient.by_association(@ingredient.id, @recipe.id)[0]
+        @recipe_ingredient.quantity = params[:ingredient][:recipe_ingredients_attributes]["0"][:quantity]
+        @recipe_ingredient.save
         redirect_to recipe_ingredient_path(@recipe, @ingredient)
     end
 

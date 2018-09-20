@@ -39,14 +39,10 @@ class Recipe < ApplicationRecord
         recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
             ingredient = Ingredient.find_or_create_by(:name => recipe_ingredient_attribute[:ingredient_attributes][:name])
 
-            recipe_ingredient = RecipeIngredient.by_association(ingredient.id, self.id)
+            recipe_ingredient = RecipeIngredient.find_or_create_by(:ingredient_id => ingredient.id)
+            recipe_ingredient.update(:quantity => recipe_ingredient_attribute[:quantity])
 
-            if recipe_ingredient.exists?
-
-            else
-                recipe_ingredient = RecipeIngredient.create(:ingredient_id => ingredient.id, :quantity => recipe_ingredient_attribute[:quantity])
-                self.recipe_ingredients << recipe_ingredient
-            end
+            self.recipe_ingredients << recipe_ingredient
         end
     end
 end

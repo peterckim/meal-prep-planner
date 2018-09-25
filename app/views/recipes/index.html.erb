@@ -1,16 +1,20 @@
-<h1>Recipes</h1>
+<div class="recipe-filter">
+    <%= form_tag("/recipes", method: "get") do %>
+        <%= select_tag "ingredient", options_from_collection_for_select(@ingredients, "id", "name"), include_blank: true %>
+        <%= submit_tag "Filter" %>
+    <% end %>
+</div>
 
-<%= form_tag("/recipes", method: "get") do %>
-    <%= select_tag "ingredient", options_from_collection_for_select(@ingredients, "id", "name"), include_blank: true %>
-    <%= submit_tag "Filter" %>
-<% end %>
-
-<ul>
-<% @recipes.each do |recipe| %>
-    <li><%= link_to recipe.name, recipe_path(recipe) %></li>
-<% end %>
-</ul>
+<div class="recipes">
+    <% @recipes.each do |recipe| %>
+        <div class="recipe-card">
+            <img src="<%= recipe.image %>" />
+            <%= link_to recipe.name, recipe_path(recipe) %>
+        </div>
+    <% end %>
+</div>
 
 <%= link_to "New Recipe", new_recipe_path %><br>
 
 <%= link_to "Logout", '/logout', method: :post %>
+

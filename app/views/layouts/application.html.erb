@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RecipeManager</title>
+    <title>Weekly Meal Planner</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,36 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="logo">
+        <h1>Weekly Meal Planner</h1>
+      </div>
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/login">LOG IN</a>
+        <a href="/signup">SIGN UP</a>
+        <a href="/recipes">ARCHIVE</a>
+        <a href="/cart">CART</a>
+      </nav>
+    </header>
+  
+
+
+    <main>
+      <%= yield %>
+    </main>
+
+
+
+    <footer>
+      <a href="">About Us</a>
+      <a href="">Contact Us</a>
+      <a href="">Affiliate Program</a>
+      <a href="">Blog</a>
+      <a href="">FAQ</a>
+      <a href="">Terms & Conditions</a>
+    </footer>
+
+
   </body>
 </html>

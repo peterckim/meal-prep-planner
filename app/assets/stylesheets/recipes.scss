@@ -1,3 +1,56 @@
 // Place all the styles related to the Recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.recipes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-card img {
+  max-width: 15rem;
+  max-height: 15rem;
+}
+
+.recipe-card a {
+  text-align: center;
+}
+
+.recipe-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.recipe-filter form select {
+  border: 1px solid #557a95;
+  border-radius: 3px;
+  padding: 0.3rem;
+  text-align: center;
+  background-color: white;
+  font-size: 1rem;
+  color: #557a95;
+  font-family: "Avenir Next", "Lato", sans-serif;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.recipe-filter form input[type="submit"] {
+  border: 1px solid #557a95;
+  border-radius: 3px;
+  padding: 0.3rem;
+  text-align: center;
+  background-color: #557a95;
+  font-size: 1rem;
+  color: white;
+  font-family: "Avenir Next", "Lato", sans-serif;
+  text-transform: uppercase;
+  width: 100%;
+}

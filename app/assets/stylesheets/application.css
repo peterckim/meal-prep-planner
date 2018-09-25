@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: "Avenir Next", "Lato", sans-serif;
+  color: #557a95;
+  min-height: 100%;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  height: 5rem;
+  padding-left: 8rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+  width: 100%;
+}
+
+nav {
+  padding-right: 7rem;
+}
+
+nav a {
+  padding-left: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #7395ae;
+  font-family: "Raleway" "Lato", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+main {
+  min-height: 20rem;
+}
+
+footer {
+  margin-top: 10rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 20rem;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #ccbac4;
+  font-family: "Avenir Next", "Lato", sans-serif;
+  background-color: #557a95;
+}
+
+footer a {
+  padding-top: 1rem;
+  color: white;
+}

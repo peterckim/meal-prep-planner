@@ -1,8 +1,9 @@
-<% flash.each do |key, value| %>
-    <div class="flash <%= key %>"><%= value %></div>
-<% end %>
 
-<br>
+
+
+
+<% 
+=begin %> 
 
 <%= form_tag('/sessions') do %>
     <%= text_field_tag :email %>
@@ -11,3 +12,6 @@
 <% end %>
 <%= link_to('Sign Up Here', new_user_path) %>
 <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+
+<% 
+=end %>

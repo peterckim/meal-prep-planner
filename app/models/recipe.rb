@@ -1,6 +1,8 @@
 class Recipe < ApplicationRecord
     has_many :recipe_ingredients
+    has_many :cart_recipes
     has_many :ingredients, through: :recipe_ingredients
+    has_many :carts, through: :cart_recipes
     accepts_nested_attributes_for :ingredients
 
     validates :name, presence: true

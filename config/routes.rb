@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   post '/sessions' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
 
+  get '/signup', to: 'users#new'
+  post '/signup', to: 'users#create'
+  get '/account', to: 'users#show'
+
+  get '/cart', to: 'carts#show'
+
   resources :recipes, only: [:show, :new, :index, :create, :edit, :update] do
     resources :ingredients
   end
@@ -16,5 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
+  resources :carts
 
 end

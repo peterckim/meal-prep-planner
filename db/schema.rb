@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_200459) do
+ActiveRecord::Schema.define(version: 2018_09_25_004624) do
+
+  create_table "cart_recipes", force: :cascade do |t|
+    t.integer "cart_id"
+    t.integer "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_recipes_on_cart_id"
+    t.index ["recipe_id"], name: "index_cart_recipes_on_recipe_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
@@ -30,9 +46,10 @@ ActiveRecord::Schema.define(version: 2018_09_13_200459) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "instructions"
+    t.string "image"
   end
 
   create_table "users", force: :cascade do |t|

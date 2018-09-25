@@ -1,3 +1,54 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login form input[type="text"],
+.login form input[type="password"] {
+  border-radius: 5px;
+  height: 1rem;
+  padding: 0.5rem 0;
+  border: solid 1px #7395ae;
+  color: #7395ae;
+  text-align: center;
+  width: 100%;
+  font-size: 0.8rem;
+  font-family: "Avenir Next", "Lato", sans-serif;
+}
+
+.login form input[type="submit"] {
+  border: 1px solid #557a95;
+  border-radius: 3px;
+  padding: 0.3rem;
+  text-align: center;
+  background-color: #557a95;
+  font-size: 1rem;
+  color: white;
+  font-family: "Avenir Next", "Lato", sans-serif;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.login a {
+  padding-top: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #7395ae;
+  font-family: "Raleway" "Lato", sans-serif;
+  letter-spacing: 0.5px;
+}

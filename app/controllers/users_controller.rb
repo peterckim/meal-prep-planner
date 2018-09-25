@@ -7,7 +7,10 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            cart = Cart.find_or_create_by(:user_id => @user.id)
             session[:user_id] = @user.id
+            session[:cart_id] = cart.id
+
             redirect_to recipes_path
         else
             render :new

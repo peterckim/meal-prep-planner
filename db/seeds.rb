@@ -38,3 +38,6 @@
 
 # RecipeIngredient.create(:recipe_id => 1, :ingredient_id => 9, :quantity => "1 cup")
 
+# CartRecipe.create(:recipe_id => 1, :cart_id => 1)
+
+# CartRecipe.create(:recipe_id => 2, :cart_id => 1)

@@ -22,7 +22,7 @@
   height: 1rem;
   padding: 0.5rem 0;
   border: solid 1px #7395ae;
-  color: #7395ae;
+  color: #5d5c61;
   text-align: center;
   width: 100%;
   font-size: 0.8rem;
@@ -40,4 +40,9 @@
   font-family: "Avenir Next", "Lato", sans-serif;
   text-transform: uppercase;
   width: 100%;
+}
+
+.user-image {
+  max-width: 15rem;
+  max-height: 15rem;
 }

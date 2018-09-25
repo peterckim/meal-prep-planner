@@ -17,10 +17,12 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to recipes_path
       else
-        @user = User.find_by(:email => params[:email])
-        if @user && @user.authenticate(params[:password])
+        @user = User.find_by(:email => params[:user][:email])
+        if @user && @user.authenticate(params[:user][:password])
+          cart = Cart.find_or_create_by(:user_id => @user.id)
           session[:user_id] = @user.id
-          redirect_to recipes_path
+          session[:cart_id] = cart.id
+          redirect_to user_path(@user)
         else
           flash.now[:notice] = "Invalid email/password combination."
           @user = User.new
@@ -30,7 +32,9 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-      reset_session
+      if logged_in?
+        reset_session
+      end
       
       redirect_to root_path
     end

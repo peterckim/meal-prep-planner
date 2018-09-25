@@ -16,9 +16,15 @@
       </div>
       <nav>
         <a href="/">HOME</a>
-        <a href="/login">LOG IN</a>
-        <a href="/signup">SIGN UP</a>
-        <a href="/recipes">ARCHIVE</a>
+        <% if !logged_in? %>
+          <a href="/login">LOG IN</a>
+          <a href="/signup">SIGN UP</a>
+        <% end %>
+        <% if logged_in? %>
+          <a href="/users/<%= current_user.id %>">ACCOUNT</a>
+          <a href="/logout">LOG OUT</a>
+        <% end %>
+        <a href="/recipes">RECIPES</a>
         <a href="/cart">CART</a>
       </nav>
     </header>

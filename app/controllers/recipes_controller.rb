@@ -46,6 +46,15 @@ class RecipesController < ApplicationController
 
     end
 
+    def add_to_cart
+        binding.pry
+        @recipe = Recipe.find_by(:id => params[:id])
+        #creates CartItem and if logged in associates with user or cart_id is nil
+        CartRecipe.create(cart_id: session[:cart_id], recipe_id: params[:id])
+
+        redirect_to recipe_path(@recipe)
+    end
+
     private
 
 =begin

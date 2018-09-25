@@ -11,8 +11,8 @@
 
 <h3>Instructions:</h3>
 
-<p><%= @recipe.content %></p>
+<p><%= @recipe.instructions %></p>
 
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %>
 
-<h3><%= link_to "Home", root_path %></h3>
+<%= link_to "Add to Cart", {controller: "recipes", action: "add_to_cart", id: @recipe}, method: "post" %>

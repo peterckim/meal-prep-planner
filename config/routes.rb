@@ -4,14 +4,16 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
 
   get '/login' => 'sessions#new'
-  post '/sessions' => 'sessions#create'
-  post '/logout' => 'sessions#destroy'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/account', to: 'users#show'
 
   get '/cart', to: 'carts#show'
+
+  post '/add_to_cart', to: 'recipes#add_to_cart'
 
   resources :recipes, only: [:show, :new, :index, :create, :edit, :update] do
     resources :ingredients
@@ -24,5 +26,9 @@ Rails.application.routes.draw do
   resources :users
 
   resources :carts
+
+  resources :cart_recipes
+
+
 
 end

@@ -1,10 +1,10 @@
 <div class="recipes-list">
     <% @cart.recipes.each do |recipe| %>
-        <div class="recipe-card">
-            <div class="recipe-card-image">
+        <div class="cart-recipe-card">
+            <div class="cart-recipe-card-image">
                 <img src=<%= recipe.image %> />
             </div>
-            <div class="recipe-card-name">
+            <div class="cart-recipe-card-name">
                 <p><%= recipe.name %></p>
             </div>
 

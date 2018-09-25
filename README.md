@@ -1,8 +1,8 @@
-# Recipe Manager
+# Meal Prep Planner
 
-The MyPark App is a Rails Application designed to help connect NBA 2K MyPark free agents find teams to join and vice versa. The application also provides an all-purpose dashboard that displays previous match stats, upcoming matches, and user messages upon login.
+The Meal Prep Planner is a Rails Application designed to help individuals plan out their meal prep for the week by looking through an online database of recipes that one can filter based off the ingredients already in one's fridge.
 
-Visit [Recipe Manager](#) to begin using the app. A video walkthrough is available on [here](#).
+Visit [Meal Prep Planner](#) to begin using the app. A video walkthrough is available on [here](#).
 
 ## Getting Started
 
@@ -31,14 +31,12 @@ rails s
 And find your app at [localhost:3000](http://localhost:3000).
 
 ## Built With
-
-- [Bootstrap](https://getbootstrap.com/) - front-end framework
 - [Ruby on Rails](https://rubyonrails.org/) - server-side web application framework
 
 ## Contributors Guide
 
-Bug reports, pull requests, and suggestions are welcome on GitHub at https://github.com/peterckim/recipe-manager. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports, pull requests, and suggestions are welcome on GitHub at https://github.com/peterckim/meal-prep-planner. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
-The app is available as open source under the terms of the [MIT License](https://github.com/peterckim/recipe-manager/blob/master/LICENSE.md).
+The app is available as open source under the terms of the [MIT License](https://github.com/peterckim/meal-prep-planner/blob/master/LICENSE.md).

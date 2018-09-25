@@ -54,6 +54,18 @@ class RecipesController < ApplicationController
         redirect_to recipe_path(@recipe)
     end
 
+    def remove_from_cart
+        recipe = Recipe.find_by(:id => params[:id])
+        cart = Cart.find_by(:id => session[:cart_id])
+        cart_recipe = CartRecipe.find_by(cart_id: cart.id, recipe_id: recipe.id)
+
+        cart_recipe.destroy
+
+        redirect_to cart_path
+    end
+
+
+
     private
 
 =begin

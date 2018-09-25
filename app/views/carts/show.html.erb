@@ -7,6 +7,8 @@
             <div class="recipe-card-name">
                 <p><%= recipe.name %></p>
             </div>
+
+            <%= link_to "Remove From Cart", {controller: "recipes", action: "remove_from_cart", id: recipe}, method: "delete" %>
         </div>
     <% end %>
 </div>

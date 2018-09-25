@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'carts#show'
 
   post '/add_to_cart', to: 'recipes#add_to_cart'
+  delete '/remove_from_cart', to: 'recipes#remove_from_cart'
 
   resources :recipes, only: [:show, :new, :index, :create, :edit, :update] do
     resources :ingredients

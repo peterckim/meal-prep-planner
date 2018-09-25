@@ -14,6 +14,10 @@
  *= require_self
  */
 
+* {
+  margin: 0;
+}
+
 body {
   font-family: "Avenir Next", "Lato", sans-serif;
   color: #557a95;
@@ -53,11 +57,16 @@ nav a {
 }
 
 main {
-  min-height: 20rem;
+  min-height: 30rem;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url("food.jpg") no-repeat center center;
+  background-size: cover;
 }
 
 footer {
-  margin-top: 10rem;
   position: relative;
   display: flex;
   justify-content: center;

@@ -1,7 +1,9 @@
 <div class="recipe-filter">
     <%= form_tag("/recipes", method: "get") do %>
         <%= select_tag "ingredient", options_from_collection_for_select(@ingredients, "id", "name"), include_blank: true %>
-        <%= submit_tag "Filter" %>
+        <%= button_tag do %>
+            <i class="fas fa-search"></i>
+        <% end %>
     <% end %>
 </div>
 

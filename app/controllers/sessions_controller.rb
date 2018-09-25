@@ -24,9 +24,9 @@ class SessionsController < ApplicationController
           session[:cart_id] = cart.id
           redirect_to user_path(@user)
         else
-          flash.now[:notice] = "Invalid email/password combination."
+          flash[:notice] = "Invalid email/password combination."
           @user = User.new
-          render 'welcome/home'
+          render 'sessions/new'
         end
       end
     end

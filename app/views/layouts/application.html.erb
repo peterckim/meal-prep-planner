@@ -8,9 +8,15 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="flash-messages">
+        <p><%= flash[:notice] %></p>
+      </div>
+    <% end %>
     <header>
       <div class="logo">
         <h1>Meal Prep Planner</h1>

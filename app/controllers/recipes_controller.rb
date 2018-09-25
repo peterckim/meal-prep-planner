@@ -48,8 +48,9 @@ class RecipesController < ApplicationController
 
     def add_to_cart
         @recipe = Recipe.find_by(:id => params[:id])
-        #creates CartItem and if logged in associates with user or cart_id is nil
         CartRecipe.find_or_create_by(cart_id: session[:cart_id], recipe_id: params[:id])
+
+        flash[:notice] = "Recipe successfully added"
 
         redirect_to recipe_path(@recipe)
     end
@@ -61,6 +62,7 @@ class RecipesController < ApplicationController
 
         cart_recipe.destroy
 
+        flash[:notice] = "Recipe successfully removed"
         redirect_to cart_path
     end
 

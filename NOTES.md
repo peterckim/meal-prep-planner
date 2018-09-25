@@ -1,6 +1,5 @@
 TODO
 
-1. Edit Quantity in Join Table
-2. Ingredient edit form won't work
+Fix Ingredient New and Create
 
-3. Refactor (DRY)
+1. No Check Boxes. The ingredient will be created underneath the nested recipe.

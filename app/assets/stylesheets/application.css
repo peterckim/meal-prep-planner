@@ -25,6 +25,16 @@ body {
   width: 100%;
 }
 
+.flash-messages {
+  background-color: #557a95;
+  height: 1.5rem;
+  color: white;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logo {
   display: flex;
   align-items: center;

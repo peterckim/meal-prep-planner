@@ -1,9 +1,10 @@
 class Ingredient < ApplicationRecord
     has_many :recipe_ingredients
     has_many :recipes, through: :recipe_ingredients
-    accepts_nested_attributes_for :recipes
     
     validates :name, presence: true
+
+    accepts_nested_attributes_for :recipes
 
     def recipes_attributes=(recipe_attributes)
         recipe_attributes.values.each do |recipe_attribute|
@@ -12,9 +13,6 @@ class Ingredient < ApplicationRecord
         end
     end
     
-
-
-    # HOW DO I GET RECIPE HERE
     def recipe_ingredients_attributes=(recipe_ingredient_attributes)
         recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
 

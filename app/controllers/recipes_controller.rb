@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
     before_action :require_login
+    
     def index
         @ingredients = Ingredient.all
 
@@ -69,26 +70,6 @@ class RecipesController < ApplicationController
 
 
     private
-
-=begin
-    params = {
-        recipe: {
-            name: "Name",
-            content: "Content",
-
-            ingredient_ids: [],
-
-            recipe_ingredients_attributes: {
-                0: {
-                    quantity: "quantity",
-                    ingredient_attributes: {
-                        name: "Name"
-                    }
-                }
-            }
-        }
-    }
-=end
 
     def recipe_params
         params.require(:recipe).permit(:name, :content, ingredient_ids: [], recipe_ingredients_attributes: [:quantity, :ingredient_id, ingredient_attributes: [:name]])

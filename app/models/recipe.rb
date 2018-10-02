@@ -3,17 +3,10 @@ class Recipe < ApplicationRecord
     has_many :cart_recipes
     has_many :ingredients, through: :recipe_ingredients
     has_many :carts, through: :cart_recipes
-    accepts_nested_attributes_for :ingredients
 
     validates :name, presence: true
 
-    def self.filter_by_ingredient(ingredient)
-        self.all.includes(:ingredients).where(ingredients: { id: ingredient })
-    end
-
-    def self.containsmilk
-        self.all.includes(:ingredients).where(ingredients: { name: 'Milk' } )
-    end
+    accepts_nested_attributes_for :ingredients
 
     def ingredients_attributes=(ingredient_attributes)
         ingredient_attributes.values.each do |ingredient_attribute|
@@ -21,21 +14,6 @@ class Recipe < ApplicationRecord
             self.ingredients << ingredient
         end
     end
-
-
-    # recipe_ingredient_attributes = {
-    #     0: {
-    #         quantity: "4",
-    #         ingredient_attributes: {
-    #             name: "Bacon"
-    #         }
-    #     }
-    # }
-
-    # result = self.recipe_ingredients has { 
-    #     recipe_id: self.id, 
-    #     ingredient_id: Ingredient.find_or_create_by(:name => "Bacon").id
-    # }
 
     def recipe_ingredients_attributes=(recipe_ingredient_attributes)
         recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
@@ -56,5 +34,14 @@ class Recipe < ApplicationRecord
                 self.recipe_ingredients << recipe_ingredient
             end
         end
+    end
+
+    # model scope methods
+    def self.filter_by_ingredient(ingredient)
+        self.all.includes(:ingredients).where(ingredients: { id: ingredient })
+    end
+
+    def self.containsmilk
+        self.all.includes(:ingredients).where(ingredients: { name: 'Milk' } )
     end
 end

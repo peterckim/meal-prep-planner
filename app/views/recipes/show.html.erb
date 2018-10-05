@@ -3,7 +3,7 @@
 <h3>Ingredients:</h3>
 <ul>
     <% @recipe.ingredients.each do |ingredient| %>
-        <li><%= @recipe.recipe_ingredients.find{ |i| i.ingredient_id == ingredient.id }.quantity  %> of <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %></li>
+        <li><%= @recipe.recipe_ingredients.find{ |i| i.ingredient_id == ingredient.id }.quantity  %> <%= link_to ingredient.name, recipe_ingredient_path(@recipe, ingredient) %></li>
     <% end %>
 </ul>
 

@@ -1,6 +1,6 @@
 <div class="recipe-filter">
     <%= form_tag("/recipes", method: "get") do %>
-        <%= select_tag "ingredient", options_from_collection_for_select(@ingredients, "id", "name"), include_blank: true %>
+        <%= text_field_tag "ingredient" %>
         <%= button_tag do %>
             <i class="fas fa-search"></i>
         <% end %>
@@ -8,11 +8,13 @@
 </div>
 
 <div class="recipes">
-    <% @recipes.each do |recipe| %>
-        <div class="recipe-card">
-            <img src="<%= recipe.image %>" />
-            <%= link_to recipe.name, recipe_path(recipe) %>
-        </div>
+    <% if @recipes %>
+        <% @recipes.each do |recipe|%>
+            <div class="recipe-card">
+                <img src="<%= recipe.image %>" />
+                <%= link_to recipe.name, recipe_path(recipe) %>
+            </div>
+        <% end %>
     <% end %>
 </div>
 

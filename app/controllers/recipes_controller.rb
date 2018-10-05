@@ -2,12 +2,22 @@ class RecipesController < ApplicationController
     before_action :require_login
     
     def index
-        @ingredients = Ingredient.all
+        if params[:ingredient].present?
+            app_id = ENV['APPLICATION_ID']
+            app_key = ENV['APPLICATION_KEY']
 
-        if !params[:ingredient].blank?
+            resp = Faraday.get 'https://api.edamam.com/search' do |req|
+                req.params['q'] = params[:ingredient]
+                req.params['app_id'] = app_id
+                req.params['app_key'] = app_key
+                req.headers['Content-Type'] = 'application/json'
+            end
+            
+            body = JSON.parse(resp.body)['hits']
+
+            Recipe.find_or_create_from_api(body)
+
             @recipes = Recipe.filter_by_ingredient(params[:ingredient])
-        else
-            @recipes = Recipe.all
         end
     end
 
@@ -45,6 +55,19 @@ class RecipesController < ApplicationController
 
     def destroy
 
+    end
+
+    def edamam
+        app_id = ENV["APPLICATION_ID"]
+        app_key = ENV["APPLICATION_KEY"]
+
+        resp = Faraday.get 'https://api.edamam.com/search' do |req|
+            req.params['q'] = params[:whatever]
+            req.params['app_id'] = app_id
+            req.params['app_key'] = app_key
+        end
+        
+        body = JSON.parse(resp.body)
     end
 
     def add_to_cart

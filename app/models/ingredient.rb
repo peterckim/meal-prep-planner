@@ -15,7 +15,6 @@ class Ingredient < ApplicationRecord
     
     def recipe_ingredients_attributes=(recipe_ingredient_attributes)
         recipe_ingredient_attributes.values.each do |recipe_ingredient_attribute|
-
             self.recipe_ingredients = self.recipe_ingredients.drop(1)
             recipe_ingredient = RecipeIngredient.create(:quantity => recipe_ingredient_attribute[:quantity])
             self.recipe_ingredients << recipe_ingredient

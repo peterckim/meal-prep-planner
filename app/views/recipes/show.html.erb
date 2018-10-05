@@ -9,10 +9,6 @@
 
 <%= link_to "New Ingredient", new_recipe_ingredient_path(@recipe) %>
 
-<h3>Instructions:</h3>
-
-<p><%= @recipe.instructions %></p>
-
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %>
 
 <%= link_to "Add to Cart", {controller: "recipes", action: "add_to_cart", id: @recipe}, method: "post" %>

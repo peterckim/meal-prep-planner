@@ -16,7 +16,6 @@ class RecipesController < ApplicationController
             body = JSON.parse(resp.body)['hits']
 
             Recipe.find_or_create_from_api(body)
-
             @recipes = Recipe.filter_by_ingredient(params[:ingredient])
         end
     end

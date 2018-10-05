@@ -1,6 +1,6 @@
 <div class="recipe-filter">
     <%= form_tag("/recipes", method: "get") do %>
-        <%= text_field_tag "ingredient" %>
+        <%= text_field_tag "ingredient", nil, placeholder: "Ingredient" %>
         <%= button_tag do %>
             <i class="fas fa-search"></i>
         <% end %>

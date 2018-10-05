@@ -70,7 +70,7 @@ class Recipe < ApplicationRecord
 
     # model scope methods
     def self.filter_by_ingredient(ingredient_name)
-        self.all.includes(:ingredients).where(ingredients: { name: ingredient_name })
+        self.all.includes(:ingredients).where(ingredients: { name: ingredient_name.downcase })
     end
 
     def self.containsmilk

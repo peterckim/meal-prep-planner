@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
     
     def index
         if params[:ingredient].present?
+            # use heroku vars
             app_id = ENV['APPLICATION_ID']
             app_key = ENV['APPLICATION_KEY']
 
@@ -12,6 +13,7 @@ class RecipesController < ApplicationController
                 req.params['app_key'] = app_key
                 req.headers['Content-Type'] = 'application/json'
             end
+            
             
             body = JSON.parse(resp.body)['hits']
 

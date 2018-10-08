@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
         if params[:ingredient].present?
             # use heroku vars
             edamam = EdamamService.new
-            body = edamam.recipes
+            body = edamam.recipes(params[:ingredient])
             Recipe.find_or_create_from_api(body)
             @recipes = Recipe.filter_by_ingredient(params[:ingredient])
         end

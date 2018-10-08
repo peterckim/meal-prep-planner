@@ -4,19 +4,8 @@ class RecipesController < ApplicationController
     def index
         if params[:ingredient].present?
             # use heroku vars
-            app_id = ENV['APPLICATION_ID']
-            app_key = ENV['APPLICATION_KEY']
-
-            resp = Faraday.get 'https://api.edamam.com/search' do |req|
-                req.params['q'] = params[:ingredient]
-                req.params['app_id'] = app_id
-                req.params['app_key'] = app_key
-                req.headers['Content-Type'] = 'application/json'
-            end
-            
-            
-            body = JSON.parse(resp.body)['hits']
-
+            edamam = EdamamService.new
+            body = edamam.recipes
             Recipe.find_or_create_from_api(body)
             @recipes = Recipe.filter_by_ingredient(params[:ingredient])
         end
@@ -56,19 +45,6 @@ class RecipesController < ApplicationController
 
     def destroy
 
-    end
-
-    def edamam
-        app_id = ENV["APPLICATION_ID"]
-        app_key = ENV["APPLICATION_KEY"]
-
-        resp = Faraday.get 'https://api.edamam.com/search' do |req|
-            req.params['q'] = params[:whatever]
-            req.params['app_id'] = app_id
-            req.params['app_key'] = app_key
-        end
-        
-        body = JSON.parse(resp.body)
     end
 
     def add_to_cart

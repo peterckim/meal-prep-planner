@@ -32,6 +32,8 @@ class Recipe < ApplicationRecord
         /ounces?/
     ]
 
+    # scope :filter_by_ingredient, -> (ingredient) {includes()}
+
 
     def ingredients_attributes=(ingredient_attributes)
         ingredient_attributes.values.each do |ingredient_attribute|

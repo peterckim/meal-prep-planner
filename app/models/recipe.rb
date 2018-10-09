@@ -10,7 +10,6 @@
 #   updated_at          :datetime           not null
 #
 
-
 class Recipe < ApplicationRecord
     has_many :recipe_ingredients
     has_many :cart_recipes

@@ -1,5 +1,18 @@
+# == Schema Information
+#
+# Table name: recipes
+#
+#   id                  :integer            not null, primary key
+#   name                :string     
+#   instructions        :string
+#   image               :string
+#   created_at          :datetime           not null
+#   updated_at          :datetime           not null
+#
+
 class RecipesController < ApplicationController
     before_action :require_login
+    before_action :set_recipe, only: [:show, :edit, :update, :add_to_cart, :remove_from_cart]
     
     def index
         if params[:ingredient].present?
@@ -12,7 +25,7 @@ class RecipesController < ApplicationController
     end
 
     def show
-        @recipe = Recipe.find(params[:id])
+        
     end
 
     def new
@@ -31,11 +44,10 @@ class RecipesController < ApplicationController
     end
 
     def edit
-        @recipe = Recipe.find_by(:id => params[:id])
+
     end
 
     def update
-        @recipe = Recipe.find_by(:id => params[:id])
         if @recipe.update(recipe_params)
             redirect_to recipe_path(@recipe)
         else
@@ -48,7 +60,6 @@ class RecipesController < ApplicationController
     end
 
     def add_to_cart
-        @recipe = Recipe.find_by(:id => params[:id])
         CartRecipe.find_or_create_by(cart_id: session[:cart_id], recipe_id: params[:id])
 
         flash[:notice] = "Recipe successfully added"
@@ -57,9 +68,8 @@ class RecipesController < ApplicationController
     end
 
     def remove_from_cart
-        recipe = Recipe.find_by(:id => params[:id])
         cart = Cart.find_by(:id => session[:cart_id])
-        cart_recipe = CartRecipe.find_by(cart_id: cart.id, recipe_id: recipe.id)
+        cart_recipe = CartRecipe.find_by(cart_id: cart.id, recipe_id: @recipe.id)
 
         cart_recipe.destroy
 
@@ -70,6 +80,10 @@ class RecipesController < ApplicationController
 
 
     private
+
+    def set_recipe
+        @recipe = Recipe.find(:id => params[:id])
+    end
 
     def recipe_params
         params.require(:recipe).permit(:name, :content, ingredient_ids: [], recipe_ingredients_attributes: [:quantity, :ingredient_id, ingredient_attributes: [:name]])

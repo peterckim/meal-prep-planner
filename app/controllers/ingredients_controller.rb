@@ -10,14 +10,15 @@
 
 class IngredientsController < ApplicationController
     before_action :require_login
+    before_action :set_ingredient, only: [:show, :edit, :update]
+    before_action :set_recipe, only: [:show, :edit, :update]
 
     def index
 
     end
 
     def show
-        @ingredient = Ingredient.find(params[:id])
-        @recipe = Recipe.find(params[:recipe_id])
+
     end
 
     def new
@@ -44,13 +45,10 @@ class IngredientsController < ApplicationController
     end
 
     def edit
-        @ingredient = Ingredient.find(params[:id])
-        @recipe = Recipe.find(params[:recipe_id])
+        
     end
 
     def update
-        @recipe = Recipe.find(params[:recipe_id])
-        @ingredient = Ingredient.find(params[:id])
         @ingredient.update(ingredient_params)
         @recipe_ingredient = RecipeIngredient.by_association(@ingredient.id, @recipe.id)[0]
         @recipe_ingredient.quantity = params[:ingredient][:recipe_ingredients_attributes]["0"][:quantity]
@@ -63,6 +61,14 @@ class IngredientsController < ApplicationController
     end
 
     private
+
+    def set_ingredient
+        @ingredient = Ingredient.find(params[:id])
+    end
+
+    def set_recipe
+        @recipe = Recipe.find(params[:recipe_id])
+    end
 
     def ingredient_params
         params.require(:ingredient).permit(:name, recipe_ids: [], recipe_ingredients_attributes: [:quantity])

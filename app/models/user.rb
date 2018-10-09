@@ -15,7 +15,7 @@
 class User < ApplicationRecord
     has_secure_password
 
-    has_one :cart
+    has_one :cart, dependent: :destroy
 
     validates :name, :email, presence: true
     validates :email, uniqueness: true

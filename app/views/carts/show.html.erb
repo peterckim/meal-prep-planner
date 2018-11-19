@@ -1,14 +1,12 @@
-<div class="recipes-list">
-    <% @cart.recipes.each do |recipe| %>
-        <div class="cart-recipe-card">
-            <div class="cart-recipe-card-image">
-                <img src=<%= recipe.image %> />
-            </div>
-            <div class="cart-recipe-card-name">
-                <p><%= recipe.name %></p>
-            </div>
-
-            <%= link_to "Remove From Cart", {controller: "recipes", action: "remove_from_cart", id: recipe}, method: "delete" %>
+<% @cart.recipes.each do |recipe| %>
+    <div class="cart-recipe-card">
+        <div class="cart-recipe-card-image">
+            <img src=<%= recipe.image %> />
         </div>
-    <% end %>
-</div>
+        <div class="cart-recipe-card-name">
+            <p><%= recipe.name %></p>
+        </div>
+
+        <%= link_to "Remove From Cart", {controller: "recipes", action: "remove_from_cart", id: recipe}, method: "delete" %>
+    </div>
+<% end %>

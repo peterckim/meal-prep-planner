@@ -10,3 +10,42 @@
         <%= link_to "Remove From Cart", {controller: "recipes", action: "remove_from_cart", id: recipe}, method: "delete" %>
     </div>
 <% end %>
+
+<button class="recipes-button">Load Recipes</button>
+
+<div class="recipes">
+
+</div>
+
+<script>
+    $(function () {
+        $(".recipes-button").on("click", function() {
+            $.get("/recipes.json", function(data) {
+                console.log("all recipes", data);
+
+                $(".recipes").append(data.map(recipe => {
+                    return(
+                        `<div class="recipe-card">
+                            <img src="${recipe.image}" />
+                            <div class="recipe-overview" data-id="${recipe.id}"></div>
+                            <button class="recipe-show-more" data-id="${recipe.id}">Show More</button>
+                        </div>`
+                    )
+                }));
+
+                $(".recipe-show-more").on("click", function() {
+                    let recipeId = parseInt($(this).attr("data-id"));
+                    $.get("/recipes/" + recipeId + ".json", function(data) {
+                        console.log("one recipe", data);
+                        $(`.recipe-overview[data-id=${data.id}]`).text(
+                            `${data.name}`
+                        );
+                    });
+
+                });
+            });
+        });
+
+        
+    });
+</script>

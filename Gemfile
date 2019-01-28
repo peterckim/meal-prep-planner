@@ -19,6 +19,8 @@ gem 'bcrypt'
 
 gem 'thin'
 
+gem 'jquery-rails'
+
 # pry
 gem 'pry'
 

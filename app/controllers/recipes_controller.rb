@@ -22,10 +22,20 @@ class RecipesController < ApplicationController
             Recipe.find_or_create_from_api(body)
             @recipes = Recipe.filter_by_ingredient(params[:ingredient])
         end
+
+        recipes = Recipe.all
+        
+        respond_to do |format|
+            format.html { render :index }
+            format.json { render json: recipes.to_json }
+        end
     end
 
     def show
-        
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @recipe.to_json }
+        end
     end
 
     def new

@@ -36,9 +36,16 @@
                 $(".recipe-show-more").on("click", function() {
                     let recipeId = parseInt($(this).attr("data-id"));
                     $.get("/recipes/" + recipeId + ".json", function(data) {
+                        let ingredients = data.ingredients.map(ingredient => {
+                            return(
+                                `<li>${ingredient.name}</li>`
+                            )
+                        })
+
                         console.log("one recipe", data);
-                        $(`.recipe-overview[data-id=${data.id}]`).text(
-                            `${data.name}`
+                        $(`.recipe-overview[data-id=${data.id}]`).html(
+                            `<h3>${data.name}</h3>
+                            <ul>${ingredients}</ul>`
                         );
                     });
 

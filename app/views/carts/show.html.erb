@@ -40,11 +40,12 @@
                             return(
                                 `<li>${ingredient.name}</li>`
                             )
-                        })
+                        }).join('')
 
                         console.log("one recipe", data);
                         $(`.recipe-overview[data-id=${data.id}]`).html(
                             `<h3>${data.name}</h3>
+                            <p>Ingredients:</p>
                             <ul>${ingredients}</ul>`
                         );
                     });

@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
     def create
         @recipe = Recipe.new(recipe_params)
         if @recipe.save
-            redirect_to recipe_path(@recipe)
+            render json: @recipe, status: 201
         else
             render :new
         end

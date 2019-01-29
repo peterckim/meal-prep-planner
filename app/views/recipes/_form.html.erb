@@ -19,23 +19,31 @@
     <%= f.submit %>
 <% end %>
 
+<div class="new-recipe">
 
-<!--
-    params = {
-        recipe: {
-            name: "Name",
-            content: "Content",
 
-            ingredient_ids: [],
+</div>
 
-            recipe_ingredients_attributes: {
-                0: {
-                    quantity: "quantity",
-                    ingredient_attributes: {
-                        name: "Name"
-                    }
-                }
-            }
-        }
-    }
--->
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      //prevent form from submitting the default way
+      event.preventDefault();
+ 
+      var values = $(this).serialize();
+ 
+      var posting = $.post('/recipes', values);
+ 
+      posting.done(function(data) {
+        let recipe = data;
+        let ingredients = recipe.ingredients.map(ingredient => {
+            return(
+                `<li>${ingredient.name}</li>`
+            )
+        })
+
+        $(".new-recipe").html(`<h2>${recipe.name}</h2><p>Ingredients:</p><ul>${ingredients}</ul>`);
+      });
+    });
+  });
+</script>

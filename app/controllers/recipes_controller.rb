@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
         
         respond_to do |format|
             format.html { render :index }
-            format.json { render json: recipes.to_json }
+            format.json { render json: recipes }
         end
     end
 

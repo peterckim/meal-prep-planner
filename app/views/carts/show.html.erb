@@ -20,72 +20,72 @@
 
 <script>
     $(function() {
-    class Recipe {
-        constructor(attrs) {
-            this.id = attrs["id"]
-            this.image = attrs["image"]
-            this.displayCard()
+        class Recipe {
+            constructor(attrs) {
+                this.id = attrs["id"]
+                this.image = attrs["image"]
+                this.displayCard()
+            }
+
+            displayCard() {
+                return (
+                    `<div class="recipe-card">
+                        <img src="${this.image}" />
+                        <div class="recipe-overview" data-id="${
+                        this.id
+                        }"></div>
+                        <button class="recipe-show-more" data-id="${
+                        this.id
+                        }">Show More</button>
+                    </div>`
+                );
+            }
         }
 
-        displayCard() {
-            return (
-                `<div class="recipe-card">
-                    <img src="${this.image}" />
-                    <div class="recipe-overview" data-id="${
-                    this.id
-                    }"></div>
-                    <button class="recipe-show-more" data-id="${
-                    this.id
-                    }">Show More</button>
-                </div>`
-            );
-        }
-    }
+        class Ingredient {
+            constructor(attrs) {
+                this.id = attrs["id"]
+                this.name = attrs["name"]
+                this.displayIngredient()
+            }
 
-    class Ingredient {
-        constructor(attrs) {
-            this.id = attrs["id"]
-            this.name = attrs["name"]
-            this.displayIngredient()
+            displayIngredient() {
+                return (
+                    `<li>${this.name}</li>`
+                )
+            }
         }
 
-        displayIngredient() {
-            return (
-                `<li>${this.name}</li>`
-            )
-        }
-    }
+        $(".recipes-button").on("click", function() {
+            $.get("/recipes.json", function(data) {
 
-    $(".recipes-button").on("click", function() {
-        $.get("/recipes.json", function(data) {
+            data.map(recipe => {
+                let recipeObject = new Recipe(recipe);
+                console.log(recipeObject)
+                console.log(recipeObject.displayCard())
+                $(".recipes").append(recipeObject.displayCard())
+            });
 
-        data.map(recipe => {
-            let recipeObject = new Recipe(recipe);
-            console.log(recipeObject)
-            console.log(recipeObject.displayCard())
-            $(".recipes").append(recipeObject.displayCard())
-        });
+            $(".recipe-show-more").on("click", function() {
+                let recipeId = parseInt($(this).attr("data-id"));
+                $.get("/recipes/" + recipeId + ".json", function(data) {
+                console.log("data.ingredients", data.ingredients);
+                let ingredients = data.ingredients
+                    .map(ingredient => {
+                        console.log("ingredient", ingredient);
+                        let currentIngredient = new Ingredient(ingredient);
 
-        $(".recipe-show-more").on("click", function() {
-            let recipeId = parseInt($(this).attr("data-id"));
-            $.get("/recipes/" + recipeId + ".json", function(data) {
-            console.log("data.ingredients", data.ingredients);
-            let ingredients = data.ingredients
-                .map(ingredient => {
-                    console.log("ingredient", ingredient);
-                    let currentIngredient = new Ingredient(ingredient);
+                        return currentIngredient.displayIngredient();
+                    }).join('');
 
-                    return currentIngredient.displayIngredient();
-                }).join('');
-
-            $(`.recipe-overview[data-id=${data.id}]`).html(
-                `<h3>${data.name}</h3>
-                            <p>Ingredients:</p>
-                            <ul>${ingredients}</ul>`
-            );
+                $(`.recipe-overview[data-id=${data.id}]`).html(
+                    `<h3>${data.name}</h3>
+                                <p>Ingredients:</p>
+                                <ul>${ingredients}</ul>`
+                );
+                });
+            });
             });
         });
-        });
-    });
     });
 </script>

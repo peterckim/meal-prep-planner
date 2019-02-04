@@ -42,6 +42,20 @@
         }
     }
 
+    class Ingredient {
+        constructor(attrs) {
+            this.id = attrs["id"]
+            this.name = attrs["name"]
+            this.displayIngredient()
+        }
+
+        displayIngredient() {
+            return (
+                `<li>${this.name}</li>`
+            )
+        }
+    }
+
     $(".recipes-button").on("click", function() {
         $.get("/recipes.json", function(data) {
 
@@ -55,11 +69,14 @@
         $(".recipe-show-more").on("click", function() {
             let recipeId = parseInt($(this).attr("data-id"));
             $.get("/recipes/" + recipeId + ".json", function(data) {
+            console.log("data.ingredients", data.ingredients);
             let ingredients = data.ingredients
                 .map(ingredient => {
-                return `<li>${ingredient.name}</li>`;
-                })
-                .join("");
+                    console.log("ingredient", ingredient);
+                    let currentIngredient = new Ingredient(ingredient);
+
+                    return currentIngredient.displayIngredient();
+                }).join('');
 
             $(`.recipe-overview[data-id=${data.id}]`).html(
                 `<h3>${data.name}</h3>
